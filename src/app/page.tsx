@@ -23,7 +23,8 @@ export default async function Home(props: {
   if (!searchParams.page) redirect("/?page=1");
 
   const page = Number(searchParams.page);
-  if (Number.isNaN(page) || page <= 0 || page > numberOfPages) notFound();
+  if (Number.isNaN(page) || !Number.isInteger(page)) notFound();
+  if (page <= 0 || page > numberOfPages) notFound();
 
   const familyData = (await fetch(
     `http://localhost:3000/api/families?page=${page}`
