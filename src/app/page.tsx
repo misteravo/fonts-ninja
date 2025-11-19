@@ -2,9 +2,11 @@ export async function generateMetadata(props: {
   searchParams: Promise<{ page?: string }>;
 }) {
   const searchParams = await props.searchParams;
-  return {
-    title: `Home - Page ${searchParams.page ?? "1"}`,
-  };
+
+  const page = Number(searchParams.page);
+  if (Number.isNaN(page) || page <= 0) return { title: "Home - Invalid page" };
+
+  return { title: `Home - Page ${page}` };
 }
 
 export default function Home() {
