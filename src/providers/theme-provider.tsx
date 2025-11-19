@@ -2,22 +2,26 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
-type ThemeValue = "default" | "light" | "dark";
+type ThemeValue = "light" | "dark";
 
 const ThemeContext = createContext<{
   theme: ThemeValue;
   toggleTheme: () => void;
 }>({
-  theme: "default",
+  theme: "light",
   toggleTheme: () => {},
 });
 
+export const useTheme = () => useContext(ThemeContext);
+
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeValue>("default");
+  const [theme, setTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
     const cookieTheme = Cookies.get("theme");
-    if (cookieTheme) setTheme(cookieTheme as ThemeValue);
+    if (cookieTheme && ["light", "dark"].includes(cookieTheme))
+      setTheme(cookieTheme as ThemeValue);
+    else setTheme(prefersDark() ? "dark" : "light");
   }, []);
 
   useEffect(() => {
@@ -32,4 +36,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 };
 
-export const useTheme = () => useContext(ThemeContext);
+function prefersDark() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
