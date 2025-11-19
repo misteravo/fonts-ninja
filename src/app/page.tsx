@@ -30,10 +30,23 @@ export default async function Home(props: {
   const families = familyData.families;
 
   return (
-    <div className="bg-gray-200 text-black grid grid-cols-3 gap-8">
-      {families.map((family) => (
-        <FamilyCard key={family.idFont} family={family} />
-      ))}
+    <div className="min-h-screen bg-gray-200 text-black flex flex-col gap-4">
+      <div className="grid grid-cols-3 gap-8">
+        {families.map((family) => (
+          <FamilyCard key={`family-${family.idFont}`} family={family} />
+        ))}
+      </div>
+      <div className="flex flex-row gap-2">
+        {Array.from({ length: 3 }).map((_, pageIndex) => (
+          <a
+            key={`navigation-button-${pageIndex + 1}`}
+            className="bg-red-400 text-white px-4 py-2 rounded-2xl"
+            href={`/?page=${pageIndex + 1}`}
+          >
+            {pageIndex + 1}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
