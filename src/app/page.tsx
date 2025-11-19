@@ -17,12 +17,13 @@ export async function generateMetadata(props: {
 export default async function Home(props: {
   searchParams: Promise<{ page?: string }>;
 }) {
+  const numberOfPages = 3;
   const searchParams = await props.searchParams;
 
   if (!searchParams.page) redirect("/?page=1");
 
   const page = Number(searchParams.page);
-  if (Number.isNaN(page) || page <= 0) notFound();
+  if (Number.isNaN(page) || page <= 0 || page > numberOfPages) notFound();
 
   const familyData = (await fetch(
     `http://localhost:3000/api/families?page=${page}`
@@ -37,7 +38,7 @@ export default async function Home(props: {
           <FamilyCard key={`family-${family.idFont}`} family={family} />
         ))}
       </div>
-      <NavigationButtons currentPage={page} numberOfPages={3} />
+      <NavigationButtons currentPage={page} numberOfPages={numberOfPages} />
     </div>
   );
 }
