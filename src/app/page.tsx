@@ -12,7 +12,7 @@ type Family = {
   idRegularFont: number;
   vendorId: string;
   price: {
-    formatedPrice: string;
+    formatedPrice?: string;
     amount: number;
     currency: string;
   };
@@ -61,7 +61,7 @@ export default async function Home(props: {
   const families = familyData.families;
 
   return (
-    <div className="bg-gray-200 grid grid-cols-3 gap-8">
+    <div className="bg-gray-200 text-black grid grid-cols-3 gap-8">
       {families.map((family) => (
         <FamilyCard key={family.idFont} family={family} />
       ))}
@@ -72,17 +72,31 @@ export default async function Home(props: {
 function FamilyCard({ family }: { family: Family }) {
   const encodedSvg = encodeURIComponent(family.images.alphabet.svg);
   const dataUrl = `data:image/svg+xml,${encodedSvg}`;
+  const svgWidth = family.images.alphabet.width;
+  const svgHeight = family.images.alphabet.height;
   return (
     <div
       key={family.idFont}
-      className="h-[314px] px-2 py-4 rounded-2xl bg-white flex flex-col items-center justify-center"
+      className="px-12 py-8 gap-8 rounded-2xl bg-white flex flex-col justify-end"
     >
       <Image
         src={dataUrl}
         alt={`${family.name} preview`}
-        width={family.images.alphabet.width}
-        height={family.images.alphabet.height}
+        width={svgWidth}
+        height={svgHeight}
       />
+      <div className="flex flex-row justify-between w-full">
+        <div className="flex flex-col">
+          <p className="font-bold">{family.name}</p>
+          <p>{family.foundry.name}</p>
+        </div>
+        <div className="flex flex-col">
+          <p>
+            {family.price ? `From ${family.price?.formatedPrice}` : <>&nbsp;</>}
+          </p>
+          <p>{family.totalFonts} styles</p>
+        </div>
+      </div>
     </div>
   );
 }
