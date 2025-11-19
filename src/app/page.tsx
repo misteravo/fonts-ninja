@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
-import { FamilyCard } from "./components/family-card";
-import { NavigationButtons } from "./components/navigation";
-import { FamilyData } from "./types/family";
+import { FamilyCard } from "../components/family-card";
+import { NavigationButtons } from "../components/navigation";
+import { FamilyData } from "../types/family";
 
 export async function generateMetadata(props: {
   searchParams: Promise<{ page?: string }>;
