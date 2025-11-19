@@ -1,4 +1,5 @@
 import { Family } from "../types/family";
+import { sanitizeSVG } from "../utils/sanitize";
 
 export function FamilyCard({ family }: { family: Family }) {
   const svg = family.images.alphabet.svg.replace(
@@ -10,7 +11,7 @@ export function FamilyCard({ family }: { family: Family }) {
       key={family.idFont}
       className="px-12 py-8 gap-8 rounded-2xl bg-card-background text-card-foreground flex flex-col justify-end"
     >
-      <div dangerouslySetInnerHTML={{ __html: svg }} />
+      <div dangerouslySetInnerHTML={{ __html: sanitizeSVG(svg) }} />
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
           <p className="font-bold">{family.name}</p>
