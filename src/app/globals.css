@@ -2,7 +2,8 @@
 
 :root {
   --background: #F7F6F6;
-  --foreground: #636366;
+  --foreground: #8E8E93;
+  --foreground-disabled: #D7D7DB;
   --card-background: #FFFFFF;
   --card-foreground: #121212;
   --button-background: #EE585A;
@@ -13,6 +14,7 @@
   :root {
     --background: #181818;
     --foreground: #636366;
+    --foreground-disabled: #636366;
     --card-background: #2C2C2E;
     --card-foreground: #FEFEFE;
     --button-background: #EE585A;
@@ -23,6 +25,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-disabled: var(--foreground-disabled);
   --color-card-background: var(--card-background);
   --color-card-foreground: var(--card-foreground);
   --color-button-background: var(--button-background);

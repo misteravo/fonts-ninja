@@ -7,7 +7,14 @@ export function NavigationButtons(props: {
 }) {
   return (
     <div className="flex flex-row gap-2 items-center justify-start">
-      <MoveLeft className="w-4 h-4" />
+      <MoveLeft
+        className={cn(
+          "w-4 h-4",
+          props.currentPage === 1
+            ? "text-foreground-disabled"
+            : "text-foreground"
+        )}
+      />
       {Array.from({ length: props.numberOfPages }).map((_, pageIndex) => {
         const isCurrentPage = pageIndex + 1 === props.currentPage;
         return (
@@ -25,7 +32,14 @@ export function NavigationButtons(props: {
           </a>
         );
       })}
-      <MoveRight className="w-4 h-4" />
+      <MoveRight
+        className={cn(
+          "w-4 h-4",
+          props.currentPage === props.numberOfPages
+            ? "text-foreground-disabled"
+            : "text-foreground"
+        )}
+      />
     </div>
   );
 }
