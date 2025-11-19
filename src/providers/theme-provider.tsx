@@ -18,24 +18,32 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [theme, setTheme] = useState<ThemeValue>("light");
 
   useEffect(() => {
-    const cookieTheme = Cookies.get("theme");
-    if (cookieTheme && ["light", "dark"].includes(cookieTheme))
-      setTheme(cookieTheme as ThemeValue);
-    else setTheme(prefersDark() ? "dark" : "light");
+    const theme = getTheme();
+    applyThemeClass(theme);
+    setTheme(theme);
   }, []);
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     const newTheme = theme === "light" ? "dark" : "light";
-
-    if (newTheme === "dark") document.documentElement.classList.add("dark");
-    else document.documentElement.classList.remove("dark");
-
+    applyThemeClass(newTheme);
     Cookies.set("theme", newTheme, { expires: 365 });
     setTheme(newTheme);
-  };
+  }
 
   return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 };
+
+function getTheme() {
+  let theme = Cookies.get("theme");
+  if (!theme || !["light", "dark"].includes(theme))
+    theme = prefersDark() ? "dark" : "light";
+  return theme as ThemeValue;
+}
+
+function applyThemeClass(theme: ThemeValue) {
+  if (theme === "dark") document.documentElement.classList.add("dark");
+  else document.documentElement.classList.remove("dark");
+}
 
 function prefersDark() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
