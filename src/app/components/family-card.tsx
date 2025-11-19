@@ -1,22 +1,16 @@
-import Image from "next/image";
 import { Family } from "../types/family";
 
 export function FamilyCard({ family }: { family: Family }) {
-  const encodedSvg = encodeURIComponent(family.images.alphabet.svg);
-  const dataUrl = `data:image/svg+xml,${encodedSvg}`;
-  const svgWidth = family.images.alphabet.width;
-  const svgHeight = family.images.alphabet.height;
+  const svg = family.images.alphabet.svg.replace(
+    /<g fill="[^"]*"/g,
+    '<g class="fill-card-foreground"'
+  );
   return (
     <div
       key={family.idFont}
       className="px-12 py-8 gap-8 rounded-2xl bg-card-background text-card-foreground flex flex-col justify-end"
     >
-      <Image
-        src={dataUrl}
-        alt={`${family.name} preview`}
-        width={svgWidth}
-        height={svgHeight}
-      />
+      <div dangerouslySetInnerHTML={{ __html: svg }} />
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
           <p className="font-bold">{family.name}</p>
