@@ -4,7 +4,7 @@ export function Button(props: {
 }) {
   return (
     <button
-      className="px-8 py-4 text-xl rounded-2xl bg-button-background text-button-foreground"
+      className="px-8 py-4 text-xl rounded-2xl bg-button-background text-button-foreground cursor-pointer"
       onClick={props.onClick}
     >
       {props.children}
