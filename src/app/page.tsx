@@ -1,5 +1,31 @@
 import { notFound, redirect } from "next/navigation";
 
+type FamilyData = {
+  families: Family[];
+  totalFamilies: number;
+};
+
+type Family = {
+  idFont: number;
+  url: string;
+  idRegularFont: number;
+  vendorId: string;
+  price: null;
+  idFamily: string;
+  name: string;
+  totalFonts: number;
+  foundry: {
+    id: string;
+    name: string;
+    totalFamilies: number;
+  };
+  images: {
+    alphabet: {
+      svg: string;
+    };
+  };
+};
+
 export async function generateMetadata(props: {
   searchParams: Promise<{ page?: string }>;
 }) {
@@ -21,7 +47,17 @@ export default async function Home(props: {
   const page = Number(searchParams.page);
   if (Number.isNaN(page) || page <= 0) notFound();
 
+  const familyData = (await fetch(
+    `http://localhost:3000/api/families?page=${page}`
+  ).then((response) => response.json())) as FamilyData;
+
+  const families = familyData.families;
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20"></div>
+    <div className="grid grid-cols-3 gap-4">
+      {families.map((family) => (
+        <div key={family.idFont}>{family.name}</div>
+      ))}
+    </div>
   );
 }
