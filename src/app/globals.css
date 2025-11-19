@@ -10,16 +10,14 @@
   --button-foreground: #FEFEFE;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #181818;
-    --foreground: #636366;
-    --foreground-disabled: #636366;
-    --card-background: #2C2C2E;
-    --card-foreground: #FEFEFE;
-    --button-background: #EE585A;
-    --button-foreground: #FEFEFE;
-  }
+:root.dark {
+  --background: #181818;
+  --foreground: #636366;
+  --foreground-disabled: #636366;
+  --card-background: #2C2C2E;
+  --card-foreground: #FEFEFE;
+  --button-background: #EE585A;
+  --button-foreground: #FEFEFE;
 }
 
 @theme inline {
