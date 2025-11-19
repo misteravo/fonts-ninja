@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 
 type FamilyData = {
@@ -10,7 +11,11 @@ type Family = {
   url: string;
   idRegularFont: number;
   vendorId: string;
-  price: null;
+  price: {
+    formatedPrice: string;
+    amount: number;
+    currency: string;
+  };
   idFamily: string;
   name: string;
   totalFonts: number;
@@ -22,6 +27,8 @@ type Family = {
   images: {
     alphabet: {
       svg: string;
+      width: number;
+      height: number;
     };
   };
 };
@@ -54,10 +61,24 @@ export default async function Home(props: {
   const families = familyData.families;
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {families.map((family) => (
-        <div key={family.idFont}>{family.name}</div>
-      ))}
+    <div className="bg-gray-200 grid grid-cols-3 gap-8">
+      {families.map((family) => {
+        const encodedSvg = encodeURIComponent(family.images.alphabet.svg);
+        const dataUrl = `data:image/svg+xml,${encodedSvg}`;
+        return (
+          <div
+            key={family.idFont}
+            className="h-[314px] px-2 py-4 rounded-2xl bg-white flex flex-col items-center justify-center"
+          >
+            <Image
+              src={dataUrl}
+              alt={`${family.name} preview`}
+              width={family.images.alphabet.width}
+              height={family.images.alphabet.height}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
