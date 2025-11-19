@@ -4,9 +4,15 @@ import { cn } from "../utils/classnames";
 export function NavigationButtons(props: {
   currentPage: number;
   numberOfPages: number;
+  className?: string;
 }) {
   return (
-    <div className="flex flex-row gap-2 items-center justify-start">
+    <div
+      className={cn(
+        "flex flex-row gap-4 items-center justify-start",
+        props.className
+      )}
+    >
       <NavigationLink
         href={`/?page=${props.currentPage - 1}`}
         disabled={props.currentPage === 1}
@@ -26,7 +32,7 @@ export function NavigationButtons(props: {
           <NavigationLink
             key={`navigation-button-${pageIndex + 1}`}
             className={cn(
-              "px-4 py-2 rounded-2xl",
+              "px-5 py-3 rounded-2xl text-xl",
               isCurrentPage
                 ? "bg-button-background text-button-foreground"
                 : "text-foreground"

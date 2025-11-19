@@ -33,13 +33,17 @@ export default async function Home(props: {
   const families = familyData.families;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col gap-4">
+    <div className="min-h-screen bg-background text-foreground flex flex-col gap-6">
       <div className="grid grid-cols-3 gap-4">
         {families.map((family) => (
           <FamilyCard key={`family-${family.idFont}`} family={family} />
         ))}
       </div>
-      <NavigationButtons currentPage={page} numberOfPages={numberOfPages} />
+      <NavigationButtons
+        currentPage={page}
+        numberOfPages={numberOfPages}
+        className="px-4"
+      />
     </div>
   );
 }
