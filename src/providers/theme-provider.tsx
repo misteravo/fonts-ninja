@@ -24,14 +24,15 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     else setTheme(prefersDark() ? "dark" : "light");
   }, []);
 
-  useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-    Cookies.set("theme", theme, { expires: 365 });
-  }, [theme]);
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
 
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    if (newTheme === "dark") document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
+
+    Cookies.set("theme", newTheme, { expires: 365 });
+    setTheme(newTheme);
+  };
 
   return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
 };
