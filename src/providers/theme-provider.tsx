@@ -34,10 +34,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 function getTheme() {
-  let theme = Cookies.get("theme");
-  if (!theme || !["light", "dark"].includes(theme))
-    theme = prefersDark() ? "dark" : "light";
-  return theme as ThemeValue;
+  const cookieTheme = Cookies.get("theme");
+  if (cookieTheme && ["light", "dark"].includes(cookieTheme as ThemeValue))
+    return cookieTheme as ThemeValue;
+  return prefersDark() ? "dark" : "light";
 }
 
 function applyThemeClass(theme: ThemeValue) {
