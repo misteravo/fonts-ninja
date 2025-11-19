@@ -62,23 +62,27 @@ export default async function Home(props: {
 
   return (
     <div className="bg-gray-200 grid grid-cols-3 gap-8">
-      {families.map((family) => {
-        const encodedSvg = encodeURIComponent(family.images.alphabet.svg);
-        const dataUrl = `data:image/svg+xml,${encodedSvg}`;
-        return (
-          <div
-            key={family.idFont}
-            className="h-[314px] px-2 py-4 rounded-2xl bg-white flex flex-col items-center justify-center"
-          >
-            <Image
-              src={dataUrl}
-              alt={`${family.name} preview`}
-              width={family.images.alphabet.width}
-              height={family.images.alphabet.height}
-            />
-          </div>
-        );
-      })}
+      {families.map((family) => (
+        <FamilyCard key={family.idFont} family={family} />
+      ))}
+    </div>
+  );
+}
+
+function FamilyCard({ family }: { family: Family }) {
+  const encodedSvg = encodeURIComponent(family.images.alphabet.svg);
+  const dataUrl = `data:image/svg+xml,${encodedSvg}`;
+  return (
+    <div
+      key={family.idFont}
+      className="h-[314px] px-2 py-4 rounded-2xl bg-white flex flex-col items-center justify-center"
+    >
+      <Image
+        src={dataUrl}
+        alt={`${family.name} preview`}
+        width={family.images.alphabet.width}
+        height={family.images.alphabet.height}
+      />
     </div>
   );
 }
