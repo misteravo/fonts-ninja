@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Logo from "./assets/logo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body>{children}</body>
+      <body>
+        <header>
+          <Logo />
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
