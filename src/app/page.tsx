@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { FamilyCard } from "./components/family-card";
+import { NavigationButtons } from "./components/navigation";
 import { FamilyData } from "./types/family";
 
 export async function generateMetadata(props: {
@@ -36,17 +37,7 @@ export default async function Home(props: {
           <FamilyCard key={`family-${family.idFont}`} family={family} />
         ))}
       </div>
-      <div className="flex flex-row gap-2">
-        {Array.from({ length: 3 }).map((_, pageIndex) => (
-          <a
-            key={`navigation-button-${pageIndex + 1}`}
-            className="bg-red-400 text-white px-4 py-2 rounded-2xl"
-            href={`/?page=${pageIndex + 1}`}
-          >
-            {pageIndex + 1}
-          </a>
-        ))}
-      </div>
+      <NavigationButtons currentPage={page} numberOfPages={3} />
     </div>
   );
 }
