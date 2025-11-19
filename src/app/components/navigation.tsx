@@ -10,7 +10,7 @@ export function NavigationButtons(props: {
       {Array.from({ length: props.numberOfPages }).map((_, pageIndex) => (
         <a
           key={`navigation-button-${pageIndex + 1}`}
-          className="bg-red-400 text-white px-4 py-2 rounded-2xl"
+          className="bg-primary text-white px-4 py-2 rounded-2xl"
           href={`/?page=${pageIndex + 1}`}
         >
           {pageIndex + 1}

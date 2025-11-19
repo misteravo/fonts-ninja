@@ -9,7 +9,7 @@ export function FamilyCard({ family }: { family: Family }) {
   return (
     <div
       key={family.idFont}
-      className="px-12 py-8 gap-8 rounded-2xl bg-white flex flex-col justify-end"
+      className="px-12 py-8 gap-8 rounded-2xl bg-card-background text-card-foreground flex flex-col justify-end"
     >
       <Image
         src={dataUrl}
