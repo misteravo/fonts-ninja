@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Inter } from "next/font/google";
 import Logo from "../assets/logo";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
       <ThemeProvider>
         <body className="p-12 flex flex-col gap-12">
           <header className="flex flex-row items-center justify-between">
-            <Logo />
+            <Link href="/">
+              <Logo />
+            </Link>
             <ThemeButton />
           </header>
           {children}

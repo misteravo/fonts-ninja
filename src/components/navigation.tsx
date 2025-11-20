@@ -1,5 +1,6 @@
 import { MoveLeft, MoveRight } from "lucide-react";
 import { cn } from "../utils/classnames";
+import Link from "next/link";
 
 export function NavigationButtons(props: {
   currentPage: number;
@@ -70,8 +71,8 @@ function NavigationLink(props: {
   if (props.disabled)
     return <span className={props.className}>{props.children}</span>;
   return (
-    <a href={props.href} className={props.className}>
+    <Link href={props.href} className={props.className}>
       {props.children}
-    </a>
+    </Link>
   );
 }
