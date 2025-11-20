@@ -1,4 +1,4 @@
-import { Card } from "@/components/family-card";
+import { Card } from "@/components/card";
 import { NavigationLink } from "@/components/link";
 import { SvgRenderer } from "@/components/svg-renderer";
 import { FontFamilyDetailsResponse } from "@/types/font-family";

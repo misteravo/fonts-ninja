@@ -1,5 +1,5 @@
-import { cn } from "@/utils/classnames";
 import { FontFamily } from "../types/font-family";
+import { Card } from "./card";
 import { SvgRenderer } from "./svg-renderer";
 
 export function FamilyCard({ family }: { family: FontFamily }) {
@@ -23,18 +23,5 @@ export function FamilyCard({ family }: { family: FontFamily }) {
         </div>
       </div>
     </Card>
-  );
-}
-
-export function Card(props: { children: React.ReactNode; className?: string }) {
-  return (
-    <div
-      className={cn(
-        "px-16 py-16 rounded-3xl bg-card-background text-card-foreground",
-        props.className
-      )}
-    >
-      {props.children}
-    </div>
   );
 }
