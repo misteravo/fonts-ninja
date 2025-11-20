@@ -1,3 +1,4 @@
+import { Card } from "@/components/family-card";
 import { SvgRenderer } from "@/components/svg-renderer";
 import { FontFamilyDetailsResponse } from "@/types/font-family";
 
@@ -12,18 +13,18 @@ export default async function FontPage() {
   );
 
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="col-span-1">
+    <div className="flex flex-row gap-4">
+      <Card className="col-span-1 flex-2">
         <SvgRenderer svg={pangramSvg} />
-      </div>
-      <div className="col-span-1">
+      </Card>
+      <Card className="col-span-1 flex-1">
         <h1 className="font-bold text-card-foreground text-2xl">
           {fontResponse.name}
         </h1>
         <h2 className="text-card-foreground text-lg">
           {fontResponse.foundry.name}
         </h2>
-      </div>
+      </Card>
     </div>
   );
 }
