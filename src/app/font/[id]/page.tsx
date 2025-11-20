@@ -59,8 +59,8 @@ export default async function FontPage(props: {
           </NavigationLink>
         </div>
       </Card>
-      <Card className="flex-1 flex flex-col gap-1">
-        <h1 className="font-bold text-card-foreground text-2xl">
+      <Card className="flex-1 flex flex-col gap-1.5">
+        <h1 className="font-bold text-card-foreground text-3xl">
           {fontResponse.name}
         </h1>
         <h2 className="text-card-foreground text-xl">
