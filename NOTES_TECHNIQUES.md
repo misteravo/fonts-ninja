@@ -10,7 +10,7 @@
 
 **Tailwind CSS 4** : Classes utilitaires, purge automatique, configuration inline via `@theme`.
 
-**Variables CSS** : Thèmes clair/sombre via variables CSS, basculement sans JavaScript.
+**Variables CSS** : Thèmes clair/sombre via variables CSS.
 
 ## Thèmes
 
