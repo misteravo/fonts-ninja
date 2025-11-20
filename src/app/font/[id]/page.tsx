@@ -3,20 +3,22 @@ import { NavigationLink } from "@/components/link";
 import { SvgRenderer } from "@/components/svg-renderer";
 import { FontFamilyDetailsResponse } from "@/types/font-family";
 import { cn } from "@/utils/classnames";
-import { notFound } from "next/navigation";
 
-export default async function FontPage({ params }: { params: { id: string } }) {
-  const { id } = await params;
-  if (!["pangram", "alphabet"].includes(id)) notFound();
+export default async function FontPage(props: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ svg?: "alphabet" | "pangram" }>;
+}) {
+  const searchParams = await props.searchParams;
+  const svgMode = searchParams.svg === "alphabet" ? "alphabet" : "pangram";
 
   const fontResponse = (await fetch(
     `http://localhost:3000/api/familyDetails`
   ).then((response) => response.json())) as FontFamilyDetailsResponse;
 
   const svg =
-    id === "pangram"
-      ? fontResponse.images.pangram.svg
-      : fontResponse.images.alphabet.svg;
+    svgMode === "alphabet"
+      ? fontResponse.images.alphabet.svg
+      : fontResponse.images.pangram.svg;
 
   const renderedSvg = svg.replace(
     /<g fill="[^"]*"/g,
@@ -29,16 +31,16 @@ export default async function FontPage({ params }: { params: { id: string } }) {
         <SvgRenderer svg={renderedSvg} />
         <div className="flex gap-4 text-xl">
           <NavigationLink
-            href="/font/pangram"
-            className={cn(id === "pangram" && "text-button-background")}
-            disabled={id === "pangram"}
+            href="?svg=pangram"
+            className={cn(svgMode === "pangram" && "text-button-background")}
+            disabled={svgMode === "pangram"}
           >
             Pangram
           </NavigationLink>
           <NavigationLink
-            href="/font/alphabet"
-            className={cn(id === "alphabet" && "text-button-background")}
-            disabled={id === "alphabet"}
+            href="?svg=alphabet"
+            className={cn(svgMode === "alphabet" && "text-button-background")}
+            disabled={svgMode === "alphabet"}
           >
             Alphabet
           </NavigationLink>
