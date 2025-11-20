@@ -1,3 +1,4 @@
+import { cn } from "@/utils/classnames";
 import { FontFamily } from "../types/font-family";
 import { SvgRenderer } from "./svg-renderer";
 
@@ -7,10 +8,7 @@ export function FamilyCard({ family }: { family: FontFamily }) {
     `<g class="fill-card-foreground"`
   );
   return (
-    <div
-      key={family.idFont}
-      className="px-16 py-16 gap-8 rounded-3xl bg-card-background text-card-foreground flex flex-col justify-end"
-    >
+    <Card className="flex flex-col justify-end gap-8">
       <SvgRenderer svg={svg} />
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
@@ -24,6 +22,19 @@ export function FamilyCard({ family }: { family: FontFamily }) {
           <p>{family.totalFonts} styles</p>
         </div>
       </div>
+    </Card>
+  );
+}
+
+export function Card(props: { children: React.ReactNode; className?: string }) {
+  return (
+    <div
+      className={cn(
+        "px-16 py-16 rounded-3xl bg-card-background text-card-foreground",
+        props.className
+      )}
+    >
+      {props.children}
     </div>
   );
 }
