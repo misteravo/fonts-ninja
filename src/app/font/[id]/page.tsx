@@ -3,11 +3,24 @@ import { NavigationLink } from "@/components/link";
 import { SvgRenderer } from "@/components/svg-renderer";
 import { FontFamilyDetailsResponse } from "@/types/font-family";
 import { cn } from "@/utils/classnames";
+import { notFound } from "next/navigation";
+
+export async function generateMetadata(props: {
+  params: Promise<{ id: string }>;
+}) {
+  const params = await props.params;
+  const titleWords = params.id.split("-").slice(0, -1);
+  if (titleWords.length < 1) return { title: "Font - Invalid ID" };
+  return { title: titleWords.join(" ") };
+}
 
 export default async function FontPage(props: {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ svg?: "alphabet" | "pangram" }>;
 }) {
+  const params = await props.params;
+  if (params.id.indexOf("-") === -1) notFound();
+
   const searchParams = await props.searchParams;
   const svgMode = searchParams.svg === "alphabet" ? "alphabet" : "pangram";
 
