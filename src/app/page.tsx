@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { FamilyCard } from "../components/family-card";
 import { NavigationButtons } from "../components/navigation";
-import { FamilyData } from "../types/family";
+import { FontFamiliesResponse } from "../types/font-family";
 
 export async function generateMetadata(props: {
   searchParams: Promise<{ page?: string }>;
@@ -28,7 +28,7 @@ export default async function Home(props: {
 
   const familyData = (await fetch(
     `http://localhost:3000/api/families?page=${page}`
-  ).then((response) => response.json())) as FamilyData;
+  ).then((response) => response.json())) as FontFamiliesResponse;
 
   const families = familyData.families;
 

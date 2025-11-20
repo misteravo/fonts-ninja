@@ -1,7 +1,7 @@
-import { Family } from "../types/family";
+import { FontFamily } from "../types/font-family";
 import { SvgRenderer } from "./svg-renderer";
 
-export function FamilyCard({ family }: { family: Family }) {
+export function FamilyCard({ family }: { family: FontFamily }) {
   const svg = family.images.alphabet.svg.replace(
     /<g fill="[^"]*"/g,
     `<g class="fill-card-foreground"`
