@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export function NavigationLink(props: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   href: string;
   className?: string;
   disabled?: boolean;
