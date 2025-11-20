@@ -16,13 +16,13 @@ export async function generateMetadata(props: {
 
 export default async function FontPage(props: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ svg?: "alphabet" | "pangram" }>;
+  searchParams: Promise<{ display?: "alphabet" | "pangram" }>;
 }) {
   const params = await props.params;
   if (params.id.indexOf("-") === -1) notFound();
 
   const searchParams = await props.searchParams;
-  const svgMode = searchParams.svg === "alphabet" ? "alphabet" : "pangram";
+  const svgMode = searchParams.display === "alphabet" ? "alphabet" : "pangram";
 
   const fontResponse = (await fetch(
     `http://localhost:3000/api/familyDetails`
@@ -44,14 +44,14 @@ export default async function FontPage(props: {
         <SvgRenderer svg={renderedSvg} />
         <div className="flex gap-4 text-xl">
           <NavigationLink
-            href="?svg=pangram"
+            href="?display=pangram"
             className={cn(svgMode === "pangram" && "text-button-background")}
             disabled={svgMode === "pangram"}
           >
             Pangram
           </NavigationLink>
           <NavigationLink
-            href="?svg=alphabet"
+            href="?display=alphabet"
             className={cn(svgMode === "alphabet" && "text-button-background")}
             disabled={svgMode === "alphabet"}
           >
