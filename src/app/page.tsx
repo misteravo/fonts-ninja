@@ -52,7 +52,7 @@ export default async function Home(props: {
 
 function FamilyCard({ family }: { family: FontFamily }) {
   return (
-    <Card className="flex flex-col justify-end gap-8 relative">
+    <Card className="flex flex-col justify-end gap-8 relative h-[314px]">
       <NavigationLink href={family.url} className="absolute inset-0" />
       <SvgRenderer
         svg={family.images.alphabet.svg}
