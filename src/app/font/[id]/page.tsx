@@ -33,15 +33,27 @@ export default async function FontPage(props: {
       ? fontResponse.images.alphabet.svg
       : fontResponse.images.pangram.svg;
 
-  const renderedSvg = svg.replace(
-    /<g fill="[^"]*"/g,
-    `<g class="fill-card-foreground"`
-  );
-
   return (
     <div className="flex gap-4">
       <Card className="flex-2 flex flex-col justify-between gap-40">
-        <SvgRenderer svg={renderedSvg} />
+        <SvgRenderer
+          svg={svg}
+          parseOptions={{
+            replace: (domNode) => {
+              if (domNode.type === "tag") {
+                if (domNode.name === "svg") {
+                  const ratio = 348 / Number(domNode.attribs.height);
+                  domNode.attribs.width = String(
+                    Number(domNode.attribs.width) * ratio
+                  );
+                  domNode.attribs.height = "348";
+                }
+                if (domNode.name === "g")
+                  domNode.attribs.className = "fill-card-foreground";
+              }
+            },
+          }}
+        />
         <div className="flex gap-4 text-xl">
           <NavigationLink
             href="?display=pangram"

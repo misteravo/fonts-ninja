@@ -1,5 +1,9 @@
+import parse, { HTMLReactParserOptions } from "html-react-parser";
 import { sanitizeSVG } from "../utils/sanitize";
 
-export function SvgRenderer({ svg }: { svg: string }) {
-  return <div dangerouslySetInnerHTML={{ __html: sanitizeSVG(svg) }} />;
+export function SvgRenderer(props: {
+  svg: string;
+  parseOptions?: HTMLReactParserOptions;
+}) {
+  return parse(sanitizeSVG(props.svg), props.parseOptions);
 }

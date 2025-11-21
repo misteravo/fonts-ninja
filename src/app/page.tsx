@@ -51,14 +51,27 @@ export default async function Home(props: {
 }
 
 function FamilyCard({ family }: { family: FontFamily }) {
-  const svg = family.images.alphabet.svg.replace(
-    /<g fill="[^"]*"/g,
-    `<g class="fill-card-foreground"`
-  );
   return (
     <Card className="flex flex-col justify-end gap-8 relative">
       <NavigationLink href={family.url} className="absolute inset-0" />
-      <SvgRenderer svg={svg} />
+      <SvgRenderer
+        svg={family.images.alphabet.svg}
+        parseOptions={{
+          replace: (domNode) => {
+            if (domNode.type === "tag") {
+              if (domNode.name === "svg") {
+                const ratio = 153 / Number(domNode.attribs.height);
+                domNode.attribs.width = String(
+                  Number(domNode.attribs.width) * ratio
+                );
+                domNode.attribs.height = "153";
+              }
+              if (domNode.name === "g")
+                domNode.attribs.className = "fill-card-foreground";
+            }
+          },
+        }}
+      />
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
           <p className="font-bold">{family.name}</p>
