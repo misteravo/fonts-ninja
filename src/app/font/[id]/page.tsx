@@ -35,7 +35,7 @@ export default async function FontPage(props: {
 
   return (
     <div className="flex gap-4">
-      <Card className="flex-2 flex flex-col justify-between gap-40 h-[592px]">
+      <Card className="flex-2 flex flex-col justify-between h-[592px]">
         <div>
           <SvgRenderer
             svg={svg}
@@ -75,9 +75,7 @@ export default async function FontPage(props: {
         </div>
       </Card>
       <Card className="flex-1 flex flex-col gap-1.5">
-        <h1 className="font-bold text-card-foreground text-3xl">
-          {fontResponse.name}
-        </h1>
+        <h1 className="font-bold text-card-foreground">{fontResponse.name}</h1>
         <h2 className="text-card-foreground text-xl">
           {fontResponse.foundry.name}
         </h2>
