@@ -54,25 +54,27 @@ function FamilyCard({ family }: { family: FontFamily }) {
   return (
     <Card className="flex flex-col justify-end gap-8 relative h-[314px]">
       <NavigationLink href={family.url} className="absolute inset-0" />
-      <SvgRenderer
-        svg={family.images.alphabet.svg}
-        parseOptions={{
-          replace: (domNode) => {
-            if (domNode.type === "tag") {
-              if (domNode.name === "svg") {
-                const width = Number(domNode.attribs.width);
-                const height = Number(domNode.attribs.height);
-                const newHeight = 153;
-                const newWidth = width * (newHeight / height);
-                domNode.attribs.width = String(newWidth);
-                domNode.attribs.height = String(newHeight);
+      <div>
+        <SvgRenderer
+          svg={family.images.alphabet.svg}
+          parseOptions={{
+            replace: (domNode) => {
+              if (domNode.type === "tag") {
+                if (domNode.name === "svg") {
+                  const width = Number(domNode.attribs.width);
+                  const height = Number(domNode.attribs.height);
+                  const newHeight = 153;
+                  const newWidth = width * (newHeight / height);
+                  domNode.attribs.width = String(newWidth);
+                  domNode.attribs.height = String(newHeight);
+                }
+                if (domNode.name === "g")
+                  domNode.attribs.className = "fill-card-foreground";
               }
-              if (domNode.name === "g")
-                domNode.attribs.className = "fill-card-foreground";
-            }
-          },
-        }}
-      />
+            },
+          }}
+        />
+      </div>
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-col">
           <p className="font-bold">{family.name}</p>
