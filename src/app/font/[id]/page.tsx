@@ -42,12 +42,12 @@ export default async function FontPage(props: {
             replace: (domNode) => {
               if (domNode.type === "tag") {
                 if (domNode.name === "svg") {
-                  const ratio = 348 / Number(domNode.attribs.height);
-                  domNode.attribs.width = String(
-                    Number(domNode.attribs.width) * ratio
-                  );
-                  domNode.attribs.height = "348";
-                  domNode.attribs.preserveAspectRatio = "xMinYMid";
+                  const width = Number(domNode.attribs.width);
+                  const height = Number(domNode.attribs.height);
+                  const newHeight = 348;
+                  const newWidth = width * (newHeight / height);
+                  domNode.attribs.width = String(newWidth);
+                  domNode.attribs.height = String(newHeight);
                 }
                 if (domNode.name === "g")
                   domNode.attribs.className = "fill-card-foreground";

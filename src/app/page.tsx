@@ -60,11 +60,12 @@ function FamilyCard({ family }: { family: FontFamily }) {
           replace: (domNode) => {
             if (domNode.type === "tag") {
               if (domNode.name === "svg") {
-                const ratio = 153 / Number(domNode.attribs.height);
-                domNode.attribs.width = String(
-                  Number(domNode.attribs.width) * ratio
-                );
-                domNode.attribs.height = "153";
+                const width = Number(domNode.attribs.width);
+                const height = Number(domNode.attribs.height);
+                const newHeight = 153;
+                const newWidth = width * (newHeight / height);
+                domNode.attribs.width = String(newWidth);
+                domNode.attribs.height = String(newHeight);
               }
               if (domNode.name === "g")
                 domNode.attribs.className = "fill-card-foreground";
