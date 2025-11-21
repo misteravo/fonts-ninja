@@ -36,16 +36,8 @@ export default async function FontPage(props: {
   return (
     <div className="flex gap-4">
       <Card className="flex-2 flex flex-col justify-between h-[592px]">
-        <div className="[&>svg]:h-87 [&>svg]:w-auto">
-          <SvgRenderer
-            svg={svg}
-            parseOptions={{
-              replace: (domNode) => {
-                if (domNode.type === "tag" && domNode.name === "g")
-                  domNode.attribs.className = "fill-card-foreground";
-              },
-            }}
-          />
+        <div className="[&>svg]:h-87 [&>svg]:w-auto [&>svg>g]:fill-card-foreground">
+          <SvgRenderer svg={svg} />
         </div>
         <div className="flex gap-4">
           <NavigationLink

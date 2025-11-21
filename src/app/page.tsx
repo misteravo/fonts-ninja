@@ -54,16 +54,8 @@ function FamilyCard({ family }: { family: FontFamily }) {
   return (
     <Card className="flex flex-col justify-end gap-8 relative h-[314px]">
       <NavigationLink href={family.url} className="absolute inset-0" />
-      <div className="[&>svg]:h-38 [&>svg]:w-auto">
-        <SvgRenderer
-          svg={family.images.alphabet.svg}
-          parseOptions={{
-            replace: (domNode) => {
-              if (domNode.type === "tag" && domNode.name === "g")
-                domNode.attribs.className = "fill-card-foreground";
-            },
-          }}
-        />
+      <div className="[&>svg]:h-38 [&>svg]:w-auto [&>svg>g]:fill-card-foreground">
+        <SvgRenderer svg={family.images.alphabet.svg} />
       </div>
       <div className="flex flex-row justify-between w-full text-sm">
         <div className="flex flex-col">
