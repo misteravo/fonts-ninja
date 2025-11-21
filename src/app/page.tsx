@@ -1,7 +1,7 @@
 import { Card } from "@/components/card";
 import { NavigationLink } from "@/components/link";
 import { SvgRenderer } from "@/components/svg-renderer";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { NavigationButtons } from "../components/navigation";
 import { FontFamiliesResponse, FontFamily } from "../types/font-family";
 
