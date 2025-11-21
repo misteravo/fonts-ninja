@@ -38,7 +38,7 @@ export function NavigationButtons(props: {
                 ? "bg-button-background text-button-foreground"
                 : "text-foreground"
             )}
-            href={`/?page=${pageIndex + 1}`}
+            href={pageIndex === 0 ? "/" : `/?page=${pageIndex + 1}`}
             disabled={isCurrentPage}
           >
             {pageIndex + 1}

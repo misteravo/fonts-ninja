@@ -22,9 +22,7 @@ export default async function Home(props: {
   const numberOfPages = 3;
   const searchParams = await props.searchParams;
 
-  if (!searchParams.page) redirect("/?page=1");
-
-  const page = Number(searchParams.page);
+  const page = !searchParams.page ? 1 : Number(searchParams.page);
   if (Number.isNaN(page) || !Number.isInteger(page)) notFound();
   if (page <= 0 || page > numberOfPages) notFound();
 
