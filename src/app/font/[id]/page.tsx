@@ -47,6 +47,7 @@ export default async function FontPage(props: {
                     Number(domNode.attribs.width) * ratio
                   );
                   domNode.attribs.height = "348";
+                  domNode.attribs.preserveAspectRatio = "xMinYMid";
                 }
                 if (domNode.name === "g")
                   domNode.attribs.className = "fill-card-foreground";

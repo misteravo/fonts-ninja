@@ -65,6 +65,7 @@ function FamilyCard({ family }: { family: FontFamily }) {
                   Number(domNode.attribs.width) * ratio
                 );
                 domNode.attribs.height = "153";
+                domNode.attribs.preserveAspectRatio = "xMinYMid";
               }
               if (domNode.name === "g")
                 domNode.attribs.className = "fill-card-foreground";
