@@ -57,7 +57,7 @@ export default async function FontPage(props: {
             }}
           />
         </div>
-        <div className="flex gap-4 text-xl">
+        <div className="flex gap-4">
           <NavigationLink
             href="?display=pangram"
             className={cn(svgMode === "pangram" && "text-button-background")}
