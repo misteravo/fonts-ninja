@@ -36,7 +36,7 @@ export default async function Home(props: {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col gap-6">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2">
         {families.map((family) => (
           <FamilyCard key={`family-${family.idFont}`} family={family} />
         ))}
@@ -65,7 +65,6 @@ function FamilyCard({ family }: { family: FontFamily }) {
                   Number(domNode.attribs.width) * ratio
                 );
                 domNode.attribs.height = "153";
-                domNode.attribs.preserveAspectRatio = "xMinYMid";
               }
               if (domNode.name === "g")
                 domNode.attribs.className = "fill-card-foreground";

@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <ThemeProvider>
-        <body className="p-12 flex flex-col gap-16">
+        <body className="px-16 py-10 flex flex-col gap-14">
           <header className="flex flex-row items-center justify-between">
             <Link href="/">
               <Logo />
