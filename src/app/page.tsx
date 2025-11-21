@@ -75,7 +75,7 @@ function FamilyCard({ family }: { family: FontFamily }) {
           }}
         />
       </div>
-      <div className="flex flex-row justify-between w-full">
+      <div className="flex flex-row justify-between w-full text-sm">
         <div className="flex flex-col">
           <p className="font-bold">{family.name}</p>
           <p>{family.foundry.name}</p>
