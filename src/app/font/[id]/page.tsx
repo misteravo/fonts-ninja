@@ -36,23 +36,13 @@ export default async function FontPage(props: {
   return (
     <div className="flex gap-4">
       <Card className="flex-2 flex flex-col justify-between h-[592px]">
-        <div>
+        <div className="[&>svg]:h-87 [&>svg]:w-auto">
           <SvgRenderer
             svg={svg}
             parseOptions={{
               replace: (domNode) => {
-                if (domNode.type === "tag") {
-                  if (domNode.name === "svg") {
-                    const width = Number(domNode.attribs.width);
-                    const height = Number(domNode.attribs.height);
-                    const newHeight = 348;
-                    const newWidth = width * (newHeight / height);
-                    domNode.attribs.width = String(newWidth);
-                    domNode.attribs.height = String(newHeight);
-                  }
-                  if (domNode.name === "g")
-                    domNode.attribs.className = "fill-card-foreground";
-                }
+                if (domNode.type === "tag" && domNode.name === "g")
+                  domNode.attribs.className = "fill-card-foreground";
               },
             }}
           />
