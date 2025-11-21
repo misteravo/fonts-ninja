@@ -10,7 +10,7 @@ export function NavigationButtons(props: {
   return (
     <div
       className={cn(
-        "flex flex-row gap-4 items-center justify-start",
+        "flex flex-row gap-2 items-center justify-start",
         props.className
       )}
     >
@@ -33,7 +33,7 @@ export function NavigationButtons(props: {
           <NavigationLink
             key={`navigation-button-${pageIndex + 1}`}
             className={cn(
-              "px-5 py-3 rounded-2xl text-xl",
+              "p-2 rounded-2xl size-10 flex items-center justify-center",
               isCurrentPage
                 ? "bg-button-background text-button-foreground"
                 : "text-foreground"
