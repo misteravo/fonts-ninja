@@ -75,10 +75,10 @@ export default async function FontPage(props: {
         </div>
       </Card>
       <Card className="flex-1 flex flex-col gap-1.5">
-        <h1 className="font-bold text-card-foreground">{fontResponse.name}</h1>
-        <h2 className="text-card-foreground text-xl">
-          {fontResponse.foundry.name}
-        </h2>
+        <h1 className="font-bold text-card-foreground text-xl">
+          {fontResponse.name}
+        </h1>
+        <h2 className="text-card-foreground">{fontResponse.foundry.name}</h2>
       </Card>
     </div>
   );
