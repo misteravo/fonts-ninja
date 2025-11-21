@@ -1,8 +1,14 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import Cookies from "js-cookie";
 
-type ThemeValue = "light" | "dark";
+export type ThemeValue = undefined | "light" | "dark";
 
 const ThemeContext = createContext<{
   theme: ThemeValue;
@@ -14,14 +20,19 @@ const ThemeContext = createContext<{
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeValue>("light");
+export const ThemeProvider = (props: {
+  theme: ThemeValue;
+  children: ReactNode;
+}) => {
+  const [theme, setTheme] = useState<ThemeValue>(props.theme);
 
   useEffect(() => {
-    const theme = getTheme();
-    applyThemeClass(theme);
-    setTheme(theme);
-  }, []);
+    if (!theme) {
+      const newTheme = prefersDark() ? "dark" : "light";
+      applyThemeClass(newTheme);
+      setTheme(newTheme);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function toggleTheme() {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -30,15 +41,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     setTheme(newTheme);
   }
 
-  return <ThemeContext value={{ theme, toggleTheme }}>{children}</ThemeContext>;
+  return (
+    <ThemeContext value={{ theme, toggleTheme }}>{props.children}</ThemeContext>
+  );
 };
-
-function getTheme() {
-  const cookieTheme = Cookies.get("theme");
-  if (cookieTheme && ["light", "dark"].includes(cookieTheme as ThemeValue))
-    return cookieTheme as ThemeValue;
-  return prefersDark() ? "dark" : "light";
-}
 
 function applyThemeClass(theme: ThemeValue) {
   if (theme === "dark") document.documentElement.classList.add("dark");
